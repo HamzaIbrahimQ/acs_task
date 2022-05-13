@@ -28,7 +28,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with Utility {
     });
   }
 
-
   _mapLoginToState(LoginEvent event) async {
     checkInternetConnection().then((isConnect) {
       if (isConnect) {
