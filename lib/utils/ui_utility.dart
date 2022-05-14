@@ -37,6 +37,7 @@ mixin UiUtility {
   Widget? showToast(BuildContext context, String msg, {bool success = false}) {
     final FToast fToast = FToast();
     fToast.init(context);
+    fToast.removeCustomToast();
     fToast.showToast(
       child: Container(
           decoration: BoxDecoration(
