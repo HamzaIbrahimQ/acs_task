@@ -1,7 +1,7 @@
+import 'package:acs_task/component/custom_button.dart';
 import 'package:acs_task/ui/bloc/login_bloc.dart';
-import 'package:acs_task/ui/login_page.dart';
-import 'package:acs_task/ui/signup_page.dart';
-import 'package:acs_task/utils/custom_button.dart';
+import 'package:acs_task/ui/pages/signup_page.dart';
+import '../ui/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,5 +1,5 @@
-import 'package:acs_task/utils/bottom_section.dart';
-import 'package:acs_task/utils/header.dart';
+import 'package:acs_task/component/bottom_section.dart';
+import '../../component/header_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

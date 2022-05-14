@@ -4,9 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:acs_task/utils/utility.dart';
 
 class LoginRepository with Utility {
-
   Future<LoginResponse> login(String userName, String password) async {
-    String url = 'http://94.127.213.184:45/Users/LogIn';
+    String url = apiUrl + 'LogIn';
     log(jsonEncode({"Username": userName, "OldPassword": password}));
     var _response;
     LoginResponse apiResponse = LoginResponse(

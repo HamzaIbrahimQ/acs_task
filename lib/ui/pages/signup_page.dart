@@ -1,13 +1,13 @@
-import 'package:acs_task/utils/back_arrow.dart';
-import 'package:acs_task/utils/bottom_section.dart';
-import 'package:acs_task/utils/header.dart';
-import 'package:acs_task/utils/second_login_choise.dart';
+import 'package:acs_task/component/bottom_section.dart';
+import '../../component/back_arrow.dart';
+import '../../component/header_section.dart';
+import '../../component/second_login_choise.dart';
 import 'package:acs_task/utils/ui_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();

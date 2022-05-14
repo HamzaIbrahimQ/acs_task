@@ -66,12 +66,4 @@ mixin UiUtility {
     );
     return null;
   }
-
-// Color(0xffA28BC5),
-// Color(0xff977DBF),
-// Color(0xff8E72B9),
-// Color(0xff8668B4),
-// Color(0xff8262B2),
-// Color(0xff7B5AAD),
-
 }
