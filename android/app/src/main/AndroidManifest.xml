@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hamza.acs_task">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="acs_task"
         android:name="${applicationName}"

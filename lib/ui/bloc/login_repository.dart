@@ -9,7 +9,7 @@ class LoginRepository with Utility {
     log(jsonEncode({"Username": userName, "OldPassword": password}));
     var _response;
     LoginResponse apiResponse = LoginResponse(
-      errorMessage: 'حدث خطأ ما يرجى المحاولة لاحقا',
+      errorMessage: 'An error was occurred try again later',
     );
     try {
       _response = await http.post(
