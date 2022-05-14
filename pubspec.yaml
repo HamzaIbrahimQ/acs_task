@@ -26,6 +26,9 @@ dependencies:
   connectivity:
   fluttertoast: ^8.0.9
   json_annotation: ^4.0.1
+  splash_screen_view: ^3.0.0
+  material_design_icons_flutter: ^5.0.6595
+  flutter_spinkit:
 
 
 
@@ -45,7 +48,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/front_car.gif
+    - assets/
 
 
   # fonts:

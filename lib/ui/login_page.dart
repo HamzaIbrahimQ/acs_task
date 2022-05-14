@@ -1,14 +1,62 @@
 import 'package:acs_task/ui/bloc/login_bloc.dart';
+import 'package:acs_task/utils/back_arrow.dart';
+import 'package:acs_task/utils/bottom_section.dart';
+import 'package:acs_task/utils/header.dart';
+import 'package:acs_task/utils/progress_hud.dart';
+import 'package:acs_task/utils/second_login_choise.dart';
 import 'package:acs_task/utils/ui_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginPage extends StatelessWidget with UiUtility {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> with UiUtility {
+
+  String email = '';
+  String password = '';
   void _login(BuildContext context) {
+    ProgressHud.shared.startLoading(context);
     BlocProvider.of<LoginBloc>(context)
-        .add(Login(context: context, userName: '', password: ''));
+        .add(Login(context: context, userName: emailController.text, password: passwordController.text));
+    }
+
+  void _submit() {
+      if (!(_formKey.currentState?.validate() ?? false)) {
+        // Invalid!
+        return;
+      }
+      else {
+        _formKey.currentState?.save();
+        _login(context);
+      }
+
+
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
+  late TextEditingController emailController;
+
+  late TextEditingController passwordController;
+
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -16,7 +64,7 @@ class LoginPage extends StatelessWidget with UiUtility {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoggedInSuccessfullyState) {
-          showToast(context, state.msg ?? 'تم تسجيل الدخول بنجاح', success: true);
+          showToast(context, state.msg ?? 'Logged in successfully', success: true);
         }
         if (state is LoginErrorState) {
           showToast(context, state.errorMsg);
@@ -25,15 +73,86 @@ class LoginPage extends StatelessWidget with UiUtility {
           showToast(context, state.errorMsg);
         }
       },
+
+
       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            body: Center(
-              child: TextButton(
-                child: const Text('تسجيل الدخول'),
-                onPressed: () => _login(context),
-              ),
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Header(height: 0.26.sh),
+                      SizedBox(
+                        height: 0.38.sh,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 32),
+                              child: Center(
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Form(
+                              key: _formKey,
+                              child: Padding(
+                                padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
+                                child: Column(
+                                  children: [
+                                    Column(
+                                      children: <Widget>[
+                                        getTextField(
+                                          context: context,
+                                          textController: emailController,
+                                          hint: 'Email, Username of Phone',
+                                          maxLength: 20,
+                                        ),
+                                        24.verticalSpace,
+                                        getTextField(
+                                          context: context,
+                                          textController: passwordController,
+                                          hint: 'Password',
+                                          maxLength: 20,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerRight,
+                                          padding: EdgeInsets.only(top: 16.h),
+                                          child: InkWell(
+                                            onTap: () {},
+                                            child: Text(
+                                              'Forget Password?',
+                                              style: TextStyle(color: Colors.grey[600]),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      BottomSection(isHasSignUp: false, loginFunc:_submit),
+                    ],
+                  ),
+                ),
+                const BackArrow(),
+              ],
             ),
+            bottomSheet: Container(
+              padding: EdgeInsetsDirectional.only(bottom: 16.h),
+                child: const SecondLoginChoise(isFromLogin: true,)),
           ),
         );
       }),
