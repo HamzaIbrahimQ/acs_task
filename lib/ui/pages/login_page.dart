@@ -119,6 +119,7 @@ class _LoginPageState extends State<LoginPage> with UiUtility {
                                           context: context,
                                           textController: passwordController,
                                           hint: 'Password',
+                                          isPassword : true,
                                           maxLength: 20,
                                         ),
                                         Container(

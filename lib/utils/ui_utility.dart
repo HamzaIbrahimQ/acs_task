@@ -9,16 +9,20 @@ mixin UiUtility {
     required TextEditingController textController,
     int? maxLength,
     required String hint,
+    bool? isPassword = false,
   }) {
     return TextFormField(
       controller: textController,
       textInputAction: TextInputAction.next,
+      obscureText: isPassword ?? false,
       style: const TextStyle(
         color: Colors.black,
         decorationColor: Colors.black,
       ),
+
       decoration: InputDecoration(
         hintText: hint,
+
         hintStyle: TextStyle(
           color: Colors.grey[700],
         ),
